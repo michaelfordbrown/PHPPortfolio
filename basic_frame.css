@@ -1,0 +1,58 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 22-Aug-2017, 21:02:14
+    Author     : micha
+*/
+
+header{
+    font-weight: bold;
+    height: 30px;
+    background-color: orange;     
+}
+
+header#Title{
+    /* outline: red 1px dotted;*/
+    text-align: center;
+    width: 100%;
+}
+
+aside#AsideLeft{
+    /*outline: red 1px dotted; */
+    width: 25%;
+    float: left;
+    background-color: lightgreen;
+    height: 1000px;
+   
+}
+
+article#ArticleMain{
+    /*outline: red 1px dotted; */
+    width: 50%;
+    float: left;
+    height: 1000px;
+    background-color: lightgray;     
+}
+
+aside#SkillsCompetencies{
+    /*outline: red 1px dotted; */
+    width: 25%;
+    float: left;
+    height: 1000px;
+}
+
+footer#FooterLinks p{
+    /*outline: red 1px dotted; */
+    height: 30px;
+    width: 33%;
+    background-color: orange;     
+}
+
+
+
+section {
+    /* outline: blue 1px dotted;*/
+}
