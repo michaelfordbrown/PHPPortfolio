@@ -6,21 +6,22 @@
  * @author micha
  */
 
-// echo 'Portfolio Model <br/>';
+define('DEBUG', false);
+
+if(DEBUG)
+{
+    echo 'Portfolio Model Debug On<br/>';
+}
     
 class PortfolioModel {
     
     // Class Constants
     
-    const DB_FILE="portolio";
-    
-
-
     // Class Properties
  
-    
+    // Associate array that hads dynaamic data for the main portfolio page
     private $PortfolioForm = array(
-        "MyProfessionalHandle" => "Mike Brown . Newbie",
+        "MyProfessionalHandle" => array(array("Mike Brown . Newbie","#")),
         
         "IntroArray" => array("Hello! My name is Michael Brown and I am a Hampshire (Basingstoke) - based software engineer."),
        
@@ -33,7 +34,7 @@ class PortfolioModel {
     
         "FooterArray" => array(array("HOME","#")),
     
-        "KeySkillsArray" => array("HTML"),
+        "KeySkillsArray" => array(array("HTML", "Hypertext Markup Language", "#")),
 
         "QualificationsArray" => array(array("Microsoft MTA", 
                                              "98-361 Software Development Fundamentals, C#",
@@ -57,7 +58,7 @@ class PortfolioModel {
         
         "StudyPlansArray" => array(array("I have recently picked up skills in PHP (including Object-Oriented PHP, OOP)","#")),
         
-        "SiteIntroArray" => array(array("This site focuses upon recent skills I have acquired along with some learnt from previous roles.", "#"))
+        "SiteIntroArray" => array(array("XThis site focuses upon recent skills I have acquired along with some learnt from previous roles@", "#"))
         
         
         
@@ -66,155 +67,129 @@ class PortfolioModel {
     
     // Class Member Functions
 
-    public function getKeysMultidimensional(array $array) 
+ 
+   
+    public function getTableData($result, $assocIndex, $fields)
     {
-        $keys = array();
-        foreach( $array as $key => $value)
+        if(DEBUG)
         {
-            $keys[] = $key;
-            if( is_array($value) ) { 
-                $keys = array_merge($keys, $this->getKeysMultidimensional($value));
-            }
-        }
+            echo "getTableData>Number of fields: ".count($fields)."<br/>";
+        }   
         
-        return $keys;
-    }
-    
-    public function getArrayDepth($array)
-    {
-        // some functions that usually return an array occasionally return false
-        if (!is_array($array)) {
-            return 0;
-        }
+        if(count($fields) > 0)
+        {
+            $i = 0;
+            while($singleRowFromQuery = $result->fetch_assoc())
+            {
 
-        $dimensions = 1;
-        $max = 0;
-        
-        foreach ($array as $value) {
-            if (is_array($value)) {
-                $subDimensions = $this->getArrayDepth($value);
-                if ($subDimensions > $max) 
-                {
-                    $max = $subDimensions;
+                $index = 0;
+                while($index < count($fields))
+                {        
+                    switch (count($fields))
+                    {
+                        case 3:
+                        {
+                             // put handle details into array
+                            $this->PortfolioForm[$assocIndex][$i][0] = $singleRowFromQuery[$fields[$index]];
+                            if(DEBUG)
+                            {
+                                echo "case 3a getTableData>PortfolioForm[$assocIndex][$i] $fields[0] = ".$this->PortfolioForm[$assocIndex][$i][0]."<br/>";
+                            }
+                            $index++;
+                                
+                            $this->PortfolioForm[$assocIndex][$i][1] = $singleRowFromQuery[$fields[$index]];
+                            if(DEBUG)
+                            {
+                                echo "case 3b getTableData>PortfolioForm[$assocIndex][$i] $fields[1] = ".$this->PortfolioForm[$assocIndex][$i][1]."<br/>";
+                            }
+                            $index++;
+                            
+                            $this->PortfolioForm[$assocIndex][$i][2] = $singleRowFromQuery[$fields[$index]];
+                            if(DEBUG)
+                            {
+                                echo "case 3c getTableData>PortfolioForm[$assocIndex][$i] $fields[2] = ".$this->PortfolioForm[$assocIndex][$i][2]."<br/>";
+                            }
+                            $i++;
+                            break;                           
+                        }
+                            
+                        case 2:
+                        {
+                             // put handle details into array
+                            $this->PortfolioForm[$assocIndex][$i][0] = $singleRowFromQuery[$fields[$index]];
+                            if(DEBUG)
+                            {
+                                echo "<br/>case 2a getTableData>PortfolioForm[$assocIndex][$i] $fields[0] = ".$this->PortfolioForm[$assocIndex][$i][0]."<br/>";
+                            }
+                            $index++;
+                                
+                            $this->PortfolioForm[$assocIndex][$i][1] = $singleRowFromQuery[$fields[$index]];
+                            if(DEBUG)
+                            {
+                                echo "case 2b getTableData>PortfolioForm[$assocIndex][$i] $fields[1] = ".$this->PortfolioForm[$assocIndex][$i][1]."<br/>";
+                            }
+                            $i++;
+                            break;                           
+                        }
+                        
+                        case 1:
+                        {
+                            // put handle details into array
+                            $this->PortfolioForm[$assocIndex][$i] = $singleRowFromQuery[$fields[$index]];
+                            if(DEBUG)
+                            {
+                                echo "case 1 getTableData>PortfolioForm[$assocIndex][$i] $fields[$index] = ".$this->PortfolioForm[$assocIndex][$i]."<br/>";
+                            }
+                            $i++;
+                            break;
+                        }
+
+                        default:
+                        {
+                            // put handle details into array
+                            $this->PortfolioForm[$assocIndex] = $singleRowFromQuery[$fields[$index]];
+                            if(DEBUG)
+                            {
+                                echo "case 0 getTableData>PortfolioForm[$assocIndex] $fields[$index] = ".$this->PortfolioForm[$assocIndex]."<br/>";
+                            }
+                            $i++;
+                            break;
+                        }
+                    }
+                    $index++;
                 }
             }
-        }
-
-    return $dimensions+$max;
-
-    }
-    
-    public function getTableData($result, $assocIndex, $field)
-    {
-        if($result->num_rows > 0)
-        {
-            $index = 0;
-            while($singleRowFromQuery = $result->fetch_assoc())
-            {               
-                // put handle details into array
-                $this->PortfolioForm[$assocIndex][$index] = $singleRowFromQuery[$field];
-                //echo "PortfolioForm[$assocIndex][$index] = ".$this->PortfolioForm[$assocIndex][$index]."<br/>".PHP_EOL;
-                
-                $index++;
-           }
+            if(DEBUG)
+            {            
+                echo "<pre>".var_dump($this->PortfolioForm[$assocIndex])."</pre><br/>";
+            }
         }       
     }
     
-    public function getRowData($result, $assocIndex, $field1, $field2=NULL)
-    {
-        //echo "<br/>"."Data Type = ".gettype( $this->PortfolioForm[$assocIndex])."<br/>";
-        
-        $ArrayDepth = -1;
-        
-        $ArrayDepth = $this->getArrayDepth($this->PortfolioForm[$assocIndex]);
-        
-        if ($ArrayDepth == 2)
-        {
-            
-            // work around that uses initialised array
-            if (count($this->PortfolioForm[$assocIndex][0]) == 3)
-            {
-                $ArrayDepth  = 3;
-            }
-        }
-        //echo "<br/>"."Arrary Depth == ".$ArrayDepth."<br/>";
-       
-        
-
-        $index = 0;
-        while($singleRowFromQuery = $result->fetch_assoc())
-        {
-            //
-            switch ($ArrayDepth)
-            {
-                case 0:
-                {
-                    $this->PortfolioForm[$assocIndex] = $singleRowFromQuery[$field1];                
-                    //echo "PortfolioForm[$assocIndex] = ".$this->PortfolioForm[$assocIndex]."<br/>".PHP_EOL;
-                    break;
-                }
-                case 1:
-                {        
-                    $this->PortfolioForm[$assocIndex][$index] = $singleRowFromQuery[$field1];
-                    //echo "PortfolioForm[$assocIndex][$index] = ".$this->PortfolioForm[$assocIndex][$index]."<br/>".PHP_EOL;
-                    $index++;
-                }
-                break;
-            
-                case 2:
-                {
-                   
-                    $this->PortfolioForm[$assocIndex][$index][0] = $singleRowFromQuery[$field1];
-                    //echo "+PortfolioForm[$assocIndex][$index].$field1 = ".$this->PortfolioForm[$assocIndex][$index][0]."<br/>".PHP_EOL;
-                    
-                    $this->PortfolioForm[$assocIndex][$index][1] = $singleRowFromQuery["link"];
-                    //echo "-PortfolioForm[$assocIndex][$index].link = ".$this->PortfolioForm[$assocIndex][$index][1]."<br/>".PHP_EOL;
-                    
-                    $index++;
-                    break;
-                }
-                
-                case 3:
-                {
-                    $this->PortfolioForm[$assocIndex][$index][0] = $singleRowFromQuery[$field1];
-                    //echo "+PortfolioForm[$assocIndex][$index].$field1 = ".$this->PortfolioForm[$assocIndex][$index][0]."<br/>".PHP_EOL;
-                    
-                    $this->PortfolioForm[$assocIndex][$index][1] = $singleRowFromQuery[$field2];
-                    //echo "-PortfolioForm[$assocIndex][$index].$field2 = ".$this->PortfolioForm[$assocIndex][$index][1]."<br/>".PHP_EOL;
-                    
-                    $this->PortfolioForm[$assocIndex][$index][2] = $singleRowFromQuery["link"];
-                    //echo "-PortfolioForm[$assocIndex][$index].link = ".$this->PortfolioForm[$assocIndex][$index][2]."<br/>".PHP_EOL;
-                    
-                    $index++;
-                    break;
-                }
-                
-                default:
-                {
-                    echo "Warning Structure of PortfolioForm[$assocIndex] not covered!";
-                }
-            }
-        }
-
-    }
     
     public function __construct() {
         
         /*
          * local server
          * 
-         * dbPassword = "PHPFundamentals";
-         * $dbUserName = "PHPFundamentals";
-         * $dbServer = "localhost";
-         * $dbName = "portfolio";
-         * 
          */
+          
         
-        //password removed from public source
-         $dbPassword = "";
-         $dbUserName = "mysqldbuser@michaelfordbrownphpsql-mysqldbserver";
-         $dbServer = "michaelfordbrownphpsql-mysqldbserver.mysql.database.azure.com";
-         $dbName = "mysqldatabase5965";
+         /*
+          * $dbPassword = "PHPFundamentals";
+          * $dbUserName = "PHPFundamentals";
+          * $dbServer = "localhost";
+          * $dbName = "portfolio";      
+          */         
+        
+        //$password removed from public source
+        $dbPassword = "Sharonkw14hco";
+        //$dbPassword = "password removed from public source";
+
+        
+        $dbUserName = "mysqldbuser@michaelfordbrownphpsql-mysqldbserver";
+        $dbServer = "michaelfordbrownphpsql-mysqldbserver.mysql.database.azure.com";
+        $dbName = "mysqldatabase5965";
         
     
         //create a class representing connection between PHP and a MySQL database
@@ -233,10 +208,15 @@ class PortfolioModel {
         
         foreach ($ArrayKeys as $Table)
         {
-            //echo 'Table Name: '.strtolower($Table).'<br/>';
+            if(DEBUG)
+            { 
+                echo 'Table Name: '.strtolower($Table).'<br/>';
+            }
             $col = "SHOW COLUMNS FROM ".strtolower($Table);
-            //echo 'col = '.$col.'<br/>';
-            
+            if(DEBUG)
+            {
+                echo 'col = '.$col.'<br/>';
+            }
             $resultObj = $connection->query($col);
             
             //echo '<pre>'.print_r($resultObj).'</pre>';
@@ -247,30 +227,52 @@ class PortfolioModel {
                 exit;
             }
             
-            $FieldName[] = array("NULL","NULL","NULL");
+            $databaseFields = array("id", "created_at","modified_on");
+            
+            $FieldName = array("");
+            
+            reset($FieldName);
+            
+            if(DEBUG)
+            {
+                echo "Field Name Array Count ".count($FieldName)."<br/>";
+            }
+            
             if ($resultObj->num_rows > 0) 
             {
+                $l = 0;
                 for ($i = 0; $i <=($resultObj->num_rows - 1); $i++)
                 {
-                    //echo '<pre>'.print_r($row).'</pre><br/>';
                     $row = $resultObj->fetch_assoc();
-                    if ($i > 0)
+                    if(DEBUG)
                     {
-                        $FieldName[$i-1] = $row['Field'];
-                        //echo 'Field name = '.$row['Field'].'</br>';
+                        echo '<pre>'.print_r($row).'</pre><br/>';
+                    }
+
+
+                    if (!in_array($row['Field'], $databaseFields))
+                    {
+                        $FieldName[$l++] = $row['Field'];
+
+                        if(DEBUG)
+                        {                         
+                            echo 'Field name = '.$row['Field'].'</br>';
+                        }
                     } 
                 }
-                //echo '<br/>';
-                //echo '<pre>'.print_r(array_slice($resultObj, 1, 1, true)).'</pre>';
 
                 $query = "SELECT * FROM ".strtolower($Table);
-                //echo $query.'<br/>';
-                $resultObj = $connection->query($query);
-                $this->getRowData($resultObj, $Table, $FieldName[0], $FieldName[1]);
-            }
-            //echo '<br/>';
-        }
 
+                $resultObj = $connection->query($query);
+                
+                $this->getTableData($resultObj, $Table, $FieldName);
+            }
+            
+            if(DEBUG)
+            {             
+                echo '<br/>';
+            }
+        }
     }
     
      public function getPortfolioForm($index){

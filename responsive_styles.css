@@ -11,17 +11,17 @@ and open the template in the editor.
 @media screen and (min-width: 0px) {
     
     aside#AsideLeft{
-        background-color: lightgreen;        
+        /* background-color: lightgreen;        */
         display: none;
     }
     
     aside#SkillsCompetencies{
-        background-color: lightskyblue;
+        /* background-color: lightskyblue; */
         display: none;        
     }    
         
-    footer#FooterLinks p {
-        float: right;
+    footer#FooterLinks {
+        float: center;
     } 
     
 }
@@ -29,17 +29,17 @@ and open the template in the editor.
 @media screen and (min-width: 1000px) {
     
     aside#AsideLeft{
-        background-color: lightgreen;        
+        /* background-color: lightgreen;        */
         display: none;
     }
     
     aside#SkillsCompetencies{
-        background-color: lightskyblue;
+        /* background-color: lightskyblue; */
         display: block;        
     }    
         
-    footer#FooterLinks p {
-        float: left;
+    footer#FooterLinks {
+        float: center;
     }     
 }
 
@@ -50,11 +50,11 @@ and open the template in the editor.
     }
     
     aside#SkillsCompetencies{
-        background-color: lightskyblue;
+        /* background-color: lightskyblue; */
         display: block;        
     }
     
-    footer#FooterLinks p {
-        float: left;
+    footer#FooterLinks {
+        float: center;
     }    
 }

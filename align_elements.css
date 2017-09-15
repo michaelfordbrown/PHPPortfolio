@@ -13,5 +13,5 @@ and open the template in the editor.
     display: flexbox;
     flex-flow: column;
     justify-content: space-between;
-    background-color: greenyellow;
+    /* background-color: greenyellow;*/
 }
