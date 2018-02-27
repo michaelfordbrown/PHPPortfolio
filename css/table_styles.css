@@ -18,27 +18,28 @@ table{
 }
 
 th{
-    color: black;
+    color: white;
     padding: 7px;
 }
 td{
-    color: brown;
+    color: white;
     font-weight: normal;
     border: 1px solid lightgray;
     padding: 5px;
 }
 
 .td_hover:hover{
-   opacity: 0.3;
-   background-color: whitesmoke;
+   opacity: 0.5;
+   background-color: black;
    font-weight: bolder;
 }
 
 table a:link{
-    color: darkblue;
+    color: white;
 }
 
 
 table caption:hover{
-    color: darkorange;
+    color: white;
 }
+

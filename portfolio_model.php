@@ -58,10 +58,10 @@ class PortfolioModel {
         
         "StudyPlansArray" => array(array("I have recently picked up skills in PHP (including Object-Oriented PHP, OOP)","#")),
         
-        "SiteIntroArray" => array(array("XThis site focuses upon recent skills I have acquired along with some learnt from previous roles@", "#"))
+        "SiteIntroArray" => array(array("XThis site focuses upon recent skills I have acquired along with some learnt from previous roles@", "#")),
         
-        
-        
+        "SideBlockArray" => array(array("Projects",
+                                   "Projects"))        
         );
     
     
@@ -166,8 +166,29 @@ class PortfolioModel {
         }       
     }
     
-    
     public function __construct() {
+
+        function connStrToArray($conn_str){ 
+
+            // Initialize array.
+            $conn_array = array();
+
+            // Split conn string on semicolons. Results in array of "parts".
+            $parts = explode(";", $conn_str); 
+
+            // Loop through array of parts. (Each part is a string.)
+            foreach($parts as $part){ 
+
+            // Separate each string on equals sign. Results in array of 2 items.
+            $temp = explode("=", $part); 
+
+            // Make items key=>value pairs in returned array.
+            $conn_array[$temp[0]] = $temp[1];
+            }
+            return $conn_array;
+    
+        }
+    
         
         /*
          * local server
@@ -175,27 +196,25 @@ class PortfolioModel {
          */
           
         
-         /*
-          * $dbPassword = "PHPFundamentals";
-          * $dbUserName = "PHPFundamentals";
-          * $dbServer = "localhost";
-          * $dbName = "portfolio";      
-          */         
+        /* Local DB 
+        $dbPassword = "PHPFundamentals";
+        $dbUserName = "PHPFundamentals";
+        $dbServer = "localhost";
+        $dbName = "portfolio";      
+                   
         
-        //$password removed from public source
-        $dbPassword = "Sharonkw14hco";
-        //$dbPassword = "password removed from public source";
-
+        /* AZURE DB */
+        $db_Local_str = getenv("MYSQLCONNSTR_dbLocal");
+        $db_Local_Array = connStrToArray($db_Local_str);
         
-        $dbUserName = "mysqldbuser@michaelfordbrownphpsql-mysqldbserver";
-        $dbServer = "michaelfordbrownphpsql-mysqldbserver.mysql.database.azure.com";
-        $dbName = "mysqldatabase5965";
+        $dbName = $db_Local_Array['Database'];
+        $dbServer = $db_Local_Array['Data Source'];
+        $dbUserName = $db_Local_Array['User Id'];
+        $dbPassword = $db_Local_Array['Password'];
         
-    
-        //create a class representing connection between PHP and a MySQL database
+   
         $connection = new mysqli($dbServer, $dbUserName, $dbPassword, $dbName);
-
-
+                
         // check if connection to databse failed then exit with error message
         if($connection->connect_errno)
         {
@@ -219,7 +238,10 @@ class PortfolioModel {
             }
             $resultObj = $connection->query($col);
             
-            //echo '<pre>'.print_r($resultObj).'</pre>';
+            if(DEBUG)
+            {
+                echo '<pre>'.print_r($resultObj).'</pre>';
+            }
             
             if (!$resultObj)
             {

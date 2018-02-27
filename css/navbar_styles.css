@@ -8,9 +8,21 @@ and open the template in the editor.
     Author     : micha
 */
 
+header{
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: small;
+    height: 50px;
+}
+
+header button{
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: small;
+    background: lightblue;
+}
+
 /* Add a black background color to the top navigation */
 .topnav {
-    background-color: #333;
+    background-color: lightblue;
     overflow: hidden;
     position: fixed;
     top: 0;
@@ -30,12 +42,13 @@ and open the template in the editor.
 
 /* Change the color of links on hover */
 .topnav a:hover {
-    background-color: #ddd;
+    background-color: lightskyblue;
     color: black;
 }
 
 /* Add a color to the active/current link */
 .topnav a.active {
-    background-color: #4CAF50;
+    background-color: skyblue;
     color: white;
 }
+

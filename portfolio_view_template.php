@@ -24,33 +24,35 @@ $view = unserialize($_SESSION['view']);
 
         <!-- Bootstrap CDN -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script> 
 
         <!-- Style Sheets -->
-        <link href="basic_frame.css" rel="stylesheet">
-        <link href="responsive_styles.css" rel="stylesheet">        
-        <link href="navbar_styles.css" rel="stylesheet"> 
-        <link href="table_styles.css" rel="stylesheet">
-
-        <!-- Webb Page Title Tab -->
-        <title>Mike Brown Portfolio(PHP/MySQL)</title>        
-    </head>
-    <body>      
+        <link href="css/basic_frame.css" rel="stylesheet">
+        <link href="css/responsive_styles.css" rel="stylesheet">        
+        <link href="css/table_styles.css" rel="stylesheet">
+        <link href="css/footer_styles.css" rel="stylesheet">
+        <link href="css/navbar_styles.css" rel="stylesheet"> 
         
+        <!-- Webb Page Title Tab -->
+        <title>Mike Brown Portfolio</title>        
+    </head>
+    <body background="img/splash.jpg">      
+       
         <!-- Fixed Header with Links -->
-        <header id="">
-            <div class="topnav" id="myTopnav">
+        <header>
+            <div class="topnav button-area-line" id="myTopnav">
                 <?php echo "<a href=\"#\">".$view->getModel()->getPortfolioForm("MyProfessionalHandle")[0][0]."&nbsp</a>";?>
-                <a href="http://mikebrownmyportfolio.azurewebsites.net/default.aspx">Other Portfolios &nbsp;</a>
-                <a href="http://mikebrownmyportfolio.azurewebsites.net/plans.aspx">Projects &nbsp;</a>   
+                <?php foreach($view->getModel()->getPortfolioForm("SideBlockArray") as $sideblock) {
+                    echo "<a onclick=\"".$sideblock[1]."ShowFunction()\">".$sideblock[0]."</a>\n";
+                } ?>
             </div>
         </header>
         
         <!-- Left Hand Side Aside Column -->
         <aside id="AsideLeft">
-            <section  id="Projects">
+            <section  id="Projects" hidden="true">
                 <table class="">
-                    <caption>Home Projects That Used Learnt Web Technology</caption>
+                    <caption>Commercial and Home Projects</caption>
                     <thead>
                         <tr>
                             <th>Projects</th>
@@ -67,7 +69,7 @@ $view = unserialize($_SESSION['view']);
                 </table>
             </section>
 
-            <section id="Qualifications">
+            <section id="Qualifications" hidden="true">
                 <table class="">
                     <caption>Technical and Professional Qualifications</caption>
                     <thead>
@@ -87,12 +89,12 @@ $view = unserialize($_SESSION['view']);
                 </table>
             </section>
      
-            <section id="SWDevelopmentSkills">
+            <section id="SWDevelopmentSkills" hidden="true">
                 <table class="">
-                    <caption>New and Old Skills Relevant to Web Development</caption>
+                    <caption>New and Old Skills Relevant to Software Development</caption>
                     <thead>
                         <tr>
-                            <th>Web Development Skills</th>
+                            <th>Development Skills</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -115,7 +117,7 @@ $view = unserialize($_SESSION['view']);
 
             <!-- Each paragraph obtained from associate array that is read from database -->
             <section id="Greeting">
-                            <h1>Mike's Portfolio (MVC PHP / MySQL Based)</h1>
+            <h1 id="Title">Mike's Portfolio</h1>
             <p>
                     <?php foreach($view->getModel()->getPortfolioForm("IntroArray") as $intro) {
                         echo $intro."&nbsp";
@@ -163,8 +165,8 @@ $view = unserialize($_SESSION['view']);
         </article>
         
         <aside id="SkillsCompetencies">
-            <table class="">
-                <caption>List of Web Technology Skills Learnt</caption>
+            <table class=""id="KeySkills" hidden="true">
+                <caption>List of Technology Skills Learnt</caption>
                 <thead>
                     <tr>
                         <th>Key Skills</th>    
@@ -215,7 +217,7 @@ $view = unserialize($_SESSION['view']);
                 <tfoot>
                 </tfoot>
             </table>
-             <section id="KeyCompetencies">
+             <section id="KeyCompetencies" hidden="true">
                 <table class="">
                     <caption>Soft Skill Experiences</caption>
                     <thead>
@@ -232,16 +234,31 @@ $view = unserialize($_SESSION['view']);
             </section>
             
         </aside>
-        
-        <footer>
-            <div>
-                <!-- future development --->
+
+
+<footer>
+    <div class="button-area-line">
                 <?php foreach($view->getModel()->getPortfolioForm("FooterArray") as $foot) {
-                    echo "<button>";
-                    echo "<a href=\"#\">".$foot[0]."</a>";
-                    echo "</button>";
+                    echo "<a href=\"".$foot[1]."\">".$foot[0]."</a>";
                 } ?>
-            </div>
-        </footer>
+    </div>
+</footer>
+
+<script>        
+<?php 
+    foreach($view->getModel()->getPortfolioForm("SideBlockArray") as $sideblock) {
+    echo "function ".$sideblock[1]."ShowFunction() {\n";
+    echo "var hidAttribute =  document.getElementById(\"".$sideblock[1]."\").getAttribute(\"hidden\");\n";
+    echo "var elementById = document.getElementById(\"".$sideblock[1]."\");\n";
+    echo "if (hidAttribute){\n";
+    echo "  elementById.removeAttribute(\"hidden\");\n";                    
+    echo "}\n";
+    echo "else {\n";
+    echo "  elementById.setAttribute(\"hidden\", true);\n";
+    echo "};\n";
+    echo "};\n";
+    }
+?>
+    </script>
     </body>
 </html>

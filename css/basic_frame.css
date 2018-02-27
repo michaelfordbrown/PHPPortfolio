@@ -8,23 +8,21 @@ and open the template in the editor.
     Author     : micha
 */
 
-header{
-    font-weight: bold;
-    height: 30px;
-    /* background-color: orange;     */
-}
-
 body{
-    /* background-image:url('../computer_and_mouse.jpg'); */
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: small;
+    color: white;
 }
-header#Title{
-    /* outline: red 1px dotted;*/
+h1#Title{
+    font-family: 'Helvetica', 'Arial', sans-serif;
     text-align: center;
+    font-size: xx-large;
     width: 100%;
 }
 
 aside#AsideLeft{
-    /*outline: red 1px dotted; */
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: small;
     width: 25%;
     float: left;
     /*background-color: lightgreen;*/
@@ -33,40 +31,36 @@ aside#AsideLeft{
 }
 
 article#ArticleMain{
-    /*outline: red 1px dotted; */
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: large;
+    text-align: justify;
     width: 50%;
     float: left;
     height: 1000px;
-    /* background-color: lightgray;     */
-}
-
-article#ArticleMain h1{
-    text-align: center;
 }
 
 aside#SkillsCompetencies{
-    /*outline: red 1px dotted; */
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: small;
     width: 25%;
     float: left;
     height: 1000px;
 }
 
 footer div {
-    /*outline: red 1px dotted; */
-    height: 30px;
-    width: 10%;
-    margin: auto;
-    /* background-color: orange;     */
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: small;
 }
 
-#ArticleMain{
-    font-size: 150%;
-    text-align: justify;
-    color: darkblue;
+a{
+    color: white;
+}
+
+a:active { 
+    background-color: yellow;
 }
 
 section {
     /* outline: blue 1px dotted;*/
 }
-
 

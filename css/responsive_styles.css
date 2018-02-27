@@ -19,11 +19,7 @@ and open the template in the editor.
         /* background-color: lightskyblue; */
         display: none;        
     }    
-        
-    footer#FooterLinks {
-        float: center;
-    } 
-    
+
 }
 
 @media screen and (min-width: 1000px) {
@@ -38,9 +34,10 @@ and open the template in the editor.
         display: block;        
     }    
         
-    footer#FooterLinks {
+    footer, header {
         float: center;
-    }     
+    }
+
 }
 
 @media screen and (min-width: 1400px) {
@@ -54,7 +51,7 @@ and open the template in the editor.
         display: block;        
     }
     
-    footer#FooterLinks {
+    footer, header {
         float: center;
     }    
 }
