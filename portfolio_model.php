@@ -61,7 +61,12 @@ class PortfolioModel {
         "SiteIntroArray" => array(array("XThis site focuses upon recent skills I have acquired along with some learnt from previous roles@", "#")),
         
         "SideBlockArray" => array(array("Projects",
-                                   "Projects"))        
+                                   "Projects")),
+        
+        "AreaExpertArray" => array(array("Developer", 
+                                         "Mainly a C/C++ developer with new skills in C# and Web Technologies", 
+                                         "Code-Developer-Logo.png"))
+        
         );
     
     
@@ -202,7 +207,7 @@ class PortfolioModel {
         $dbServer = "localhost";
         $dbName = "portfolio";      
                    
-        
+                           
         /* AZURE DB */
         $db_Local_str = getenv("MYSQLCONNSTR_dbLocal");
         $db_Local_Array = connStrToArray($db_Local_str);
@@ -212,7 +217,7 @@ class PortfolioModel {
         $dbUserName = $db_Local_Array['User Id'];
         $dbPassword = $db_Local_Array['Password'];
         
-   
+        /* Set connection */
         $connection = new mysqli($dbServer, $dbUserName, $dbPassword, $dbName);
                 
         // check if connection to databse failed then exit with error message
