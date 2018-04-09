@@ -8,6 +8,7 @@
 
 include 'portfolio_model.php';
 include 'portfolio_view.php';
+include 'mail_view.php';
 include 'portfolio_controller.php';
 
 ?>

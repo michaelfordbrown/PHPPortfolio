@@ -1,19 +1,12 @@
 <?php
 
-/*
+/* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-// echo 'Portfolio View <br/>';
-    
-/**
- * Description of portfolio_view
- *
- * @author micha
- */
-class PortfolioView {
+class MailView {
     
     private $model;
     
@@ -27,9 +20,9 @@ class PortfolioView {
     }
     
     public function output(){
-        require_once("portfolio_view_template.php");
+        require_once("mail_view_template.php");
         $_SESSION['view'] = serialize($this);
-        header('Location:portfolio_view_template.php');
+        header('Location:mail_view_template.php');
         die();
     }
 }
