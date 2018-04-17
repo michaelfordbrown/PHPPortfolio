@@ -29,7 +29,7 @@ class PortfolioView {
     public function output(){
         require_once("portfolio_view_template.php");
         $_SESSION['view'] = serialize($this);
-        header('Location:portfolio_view_template.php');
+        //header('Location:portfolio_view_template.php');
         die();
     }
 }

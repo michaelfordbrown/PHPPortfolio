@@ -208,7 +208,7 @@ class PortfolioModel {
         $dbName = "portfolio";      
                    
                            
-        /* AZURE DB */
+        /* AZURE DB 
         $db_Local_str = getenv("MYSQLCONNSTR_dbLocal");
         $db_Local_Array = connStrToArray($db_Local_str);
         
@@ -216,6 +216,12 @@ class PortfolioModel {
         $dbServer = $db_Local_Array['Data Source'];
         $dbUserName = $db_Local_Array['User Id'];
         $dbPassword = $db_Local_Array['Password'];
+        
+        /* Remote DB */
+        $dbPassword = "Sharonkw14hco";
+        $dbUserName = "mysqldbuser@michaelfordbrownphpsql-mysqldbserver";
+        $dbServer = "michaelfordbrownphpsql-mysqldbserver.mysql.database.azure.com";
+        $dbName = "mysqldatabase5965";  
         
         /* Set connection */
         $connection = new mysqli($dbServer, $dbUserName, $dbPassword, $dbName);

@@ -1,6 +1,5 @@
 <?php
-
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -8,8 +7,8 @@
 
 require_once ('imports.php');
 // session_start — Start new or resume existing session
-if (session_status() == PHP_SESSION_NONE){
-    session_start();    
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
 }
 
 $view = unserialize($_SESSION['view']);
@@ -25,8 +24,8 @@ $view = unserialize($_SESSION['view']);
         <!-- JQuery -->
         <script type="text/javascript" src="lib/jquery-3.3.1.js"></script>
 
-        <!-- Style Sheets -->
-        <link href="./css/basic_frame.css" rel="stylesheet">
+        <!-- Style Sheets -->   
+        <link href="css/style.css" rel="stylesheet">
 
         <!-- Webb Page Title Tab -->
         <title>Mike Brown Portfolio | Mail Sent</title>  
@@ -38,35 +37,38 @@ $view = unserialize($_SESSION['view']);
     <body>
         <!-- Fixed Header with Links -->
         <header>
-            <div id="branding">
-                <h1>
-                    <?php echo "<span class=\"highlight\">" . $view->getModel()->getPortfolioForm("MyProfessionalHandle")[0][0] . "</span>"; ?>                        
-                </h1>
-            </div>
             <nav>
-                <ul>
-                    <li><a href="portfolio_view_template.php">Return to Main Page</a></li>
+                <ul class="topnav">
+                    <?php echo "<li><a class=\"branding \" href=\"" . $view->getModel()->getPortfolioForm("MyProfessionalHandle")[0][1] . "\"> <span class=\"highlight\">" . $view->getModel()->getPortfolioForm("MyProfessionalHandle")[0][0] . "</span> </a> </li>"; ?>                                            
+                    <?php
+                    echo "<li class=\"goback right \"><a class=\"active\" onclick=\"goBack()\"\">Go Back</a></li>\n";
+                    ?>                        
                 </ul>
             </nav>
         </header>
-        <section id="showcase">
-            <h1>
-                Thank You for Contacting Me.
-            </h1>
-            <p> I will try to get back to you as soon as possible.</p>
+        <section id="showcase" class="showcase">
+            <div class="center">
+                <h1>
+                    Thank You for Contacting Me.
+                </h1>
+                <p> I will try to get back to you as soon as possible.</p>
+            </div>
         </section>
 
         <footer>
-            <div class="button-area-line">
+            <ul class="bottomnav">
                 <?php
                 foreach ($view->getModel()->getPortfolioForm("FooterArray") as $foot) {
-                    echo "<a href=\"" . $foot[1] . "\">" . $foot[0] . "</a>";
+                    echo "<li><a href=\"" . $foot[1] . "\">" . $foot[0] . "</a></li>";
                 }
                 ?>
-            </div>
+            </ul>
+
         </footer>
 
         <script>
-
+            function goBack(){
+                window.history.back();
+            }
         </script>
 </html>

@@ -13,59 +13,71 @@ $view = unserialize($_SESSION['view']);
 <html>
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" conte="Software Engineer Portfolio">
         <meta name="keywords" content="portfolio, software developer, software engineer, software tester, engineer manager">
         <meta name="author" content="Mike Brown, Michael Brown">
+        <meta name="description" content="Portfolio of Basingstoke development engineer, Mike Brown, Past experiences in the wireless communication industry (development, testing support and management), has recently expanded skill set to include web technologies, looking for new opportunities.">
 
         <!-- JQuery -->
         <script type="text/javascript" src="lib/jquery-3.3.1.js"></script>
 
         <!-- Style Sheets -->
-        <link href="./css/basic_frame.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css"> 
 
         <!-- Webb Page Title Tab -->
         <title>Mike Brown Portfolio | Welcome</title>  
 
-        <script type="text/javascript">
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117662314-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-117662314-1');
         </script>
+
 
     </head>
     <body>      
         <!-- Fixed Header with Links -->
         <header>
-            <div id="branding">
-                <h1>
-                    <?php echo "<span class=\"highlight\">" . $view->getModel()->getPortfolioForm("MyProfessionalHandle")[0][0] . "</span>"; ?>                        
-                </h1>
-            </div>
             <nav>
-                <ul>
+                <ul class="topnav">
+                    <?php echo "<li><a class=\"branding active\" href=\"" . $view->getModel()->getPortfolioForm("MyProfessionalHandle")[0][1] . "\"> <span class=\"highlight\">" . $view->getModel()->getPortfolioForm("MyProfessionalHandle")[0][0] . "</span> </a> </li>"; ?>                                            
                     <?php
                     foreach ($view->getModel()->getPortfolioForm("SideBlockArray") as $i => $sideblock) {
                         echo "<li><a onclick=\"toggle_visibility('" . $sideblock[1] . "');\">" . $sideblock[0] . "</a></li>\n";
                     }
-                    echo "<li><a onclick=\"toggle_visibility('ContactForm');\">Contact</a></li>\n";
+                    echo "<li class=\"contact right\"><a onclick=\"toggle_visibility('ContactForm');\">Contact</a></li>\n";
                     ?>                        
                 </ul>
             </nav>
         </header>
-        <section id="showcase">
-            <h1>
-                Professional Software Developer
-            </h1>
-            <?php
-            foreach ($view->getModel()->getPortfolioForm("IntroArray") as $intro) {
-                echo "<p>" . $intro . "</p>\n";
-            }
-            ?>
+
+        <!-- SHOWCASE -->
+        <section id="showcase" class="showcase">
+            <div class="center">
+                <h1>
+                    Professional Software Developer
+                </h1>
+                <hr>
+                <?php
+                foreach ($view->getModel()->getPortfolioForm("IntroArray") as $intro) {
+                    echo "<p>" . $intro . "</p>\n";
+                }
+                ?>
+            </div>
         </section>
 
         <!-- PROJECTS -->
         <section id="Projects" class="popup-position">
             <div id="popup-wrapper">
                 <div id="popup-container">
-                    <table class="">
+                    <table class="datatable">
                         <thead>
                             <tr>
                                 <th>Projects</th>
@@ -75,21 +87,19 @@ $view = unserialize($_SESSION['view']);
                             <!-- Get list of projects and their links from associated data structure -->
                             <?php
                             foreach ($view->getModel()->getPortfolioForm("WebProjectsArray") as $project) {
-                                echo "<tr><td class=\"td_hover\">";
-                                echo "<p onClick=\"open_window('" . $project[1] . "')\">" . $project[0] . "</p>";
+                                echo "<tr><td class=\"td_hover\" ";
+                                echo "onClick=\"open_window('" . $project[1] . "')\"";
+                                echo ">" . $project[0];
                                 echo "</td></tr>";
                             }
                             ?>
                         </tbody>
                         <tfoot>       
                             <tr>
-                                <td>
-                                    <input class="closepopup" type="button" onclick="toggle_visibility('Projects')" value="Close Projects Pop-Up"/>
-                                </td>
+                                <td class="closepopup" onclick="toggle_visibility('Projects')">Close Projects Pop-Up</td>
                             </tr>
                         </tfoot>
-                    </table>                    
-
+                    </table>
                 </div>
             </div>
         </section>
@@ -98,10 +108,10 @@ $view = unserialize($_SESSION['view']);
         <section id="Qualifications"  class="popup-position">
             <div id="popup-wrapper">
                 <div id="popup-container">
-                    <table class="">
+                    <table class="datatable">
                         <thead>
                             <tr>
-                                <th>Qualifications</th> 
+                                <th colspan="2">Qualifications</th> 
                             </tr>
                             <tr>
                                 <th>Institution</th>
@@ -112,15 +122,17 @@ $view = unserialize($_SESSION['view']);
                             <!-- Get list of qualifications and the institution links from associated data structure -->
                             <?php
                             foreach ($view->getModel()->getPortfolioForm("QualificationsArray") as $qualification) {
-                                echo "<tr><td class=\"td_hover\"><a href = \"" . $qualification[2] . "\">" . $qualification[0] . "</a> </td><td>" . $qualification[1] . "</td></tr>";
+                                echo "<tr><td class=\"td_hover\" ";
+                                echo "onClick=\"open_window('" . $qualification[2] . "')\"";
+                                echo ">" . $qualification[0];
+                                echo "</td>";
+                                echo "<td>" . $qualification[1] . "</td></tr>";
                             }
                             ?>                 
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td>
-                                    <input class="closepopup" type="button" onclick="toggle_visibility('Qualifications')" value="Close Qualifications Pop-Up"/>
-                                </td>
+                                <td colspan="2" class="closepopup" onclick="toggle_visibility('Qualifications')">Close Qualifications Pop-Up</td>
                             </tr>                    
                         </tfoot>
                     </table>
@@ -132,7 +144,7 @@ $view = unserialize($_SESSION['view']);
         <section id="SWDevelopmentSkills" class="popup-position">
             <div id="popup-wrapper">
                 <div id="popup-container">            
-                    <table class="">
+                    <table class="datatable">
                         <thead>
                             <tr>
                                 <th>Development Skills</th>
@@ -142,15 +154,15 @@ $view = unserialize($_SESSION['view']);
                             <!-- Get list of skills from associated data structure -->                        
                             <?php
                             foreach ($view->getModel()->getPortfolioForm("SWDevSkillsArray") as $skill) {
-                                echo "<tr><td>" . $skill . "</td></tr>";
+                                echo "<tr><td>";
+                                echo $skill;
+                                echo "</td></tr>";
                             }
                             ?>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td>
-                                    <input class="closepopup" type="button" onclick="toggle_visibility('SWDevelopmentSkills')" value="Close SW Development Skills Pop-Up"/>
-                                </td>
+                                <td class="closepopup" onclick="toggle_visibility('SWDevelopmentSkills')">Close SW Development Skills Pop-Up</td>
                             </tr>                     
                         </tfoot>
                     </table>
@@ -162,10 +174,10 @@ $view = unserialize($_SESSION['view']);
         <section id="KeySkills" class="popup-position">
             <div id="popup-wrapper">
                 <div id="popup-container">                
-                    <table class="">
+                    <table class="datatable">
                         <thead>
                             <tr>
-                                <th>Key Skills</th>    
+                                <th colspan="2">Key Skills</th>    
                             </tr>
                         </thead>
                         <tbody>
@@ -207,21 +219,19 @@ $view = unserialize($_SESSION['view']);
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td>
-                                    <input class="closepopup" type="button" onclick="toggle_visibility('KeySkills')" value="Close Key Skills Pop-Up"/>
-                                </td>
+                                <td colspan="2" class="closepopup" onclick="toggle_visibility('KeySkills')">Close Key Skills Pop-Up</td>
                             </tr>                      
                         </tfoot>
                     </table>
                 </div>
             </div>
         </section>
-        
+
         <!-- COMPETENCIES -->
         <section id="KeyCompetencies" class="popup-position">
             <div id="popup-wrapper">
                 <div id="popup-container">              
-                    <table class="">
+                    <table class="datatable">
                         <thead>
                             <tr>
                                 <th>Key Competencies:</th>
@@ -236,9 +246,7 @@ $view = unserialize($_SESSION['view']);
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td>
-                                    <input class="closepopup" type="button" onclick="toggle_visibility('KeyCompetencies')" value="Close Key Competencies Pop-Up"/>
-                                </td>
+                                <td class="closepopup" onclick="toggle_visibility('KeyCompetencies')">Close Key Competencies Pop-Up</td>
                             </tr>                      
                         </tfoot>
                     </table>
@@ -251,10 +259,10 @@ $view = unserialize($_SESSION['view']);
             <div id="popup-wrapper">
                 <div id="popup-container">
                     <form action="index.php" method="post">
-                        <table class="">
+                        <table class="datatable">
                             <thead>
                                 <tr>
-                                    <th>Contact:</th>
+                                    <th colspan="2">Contact:</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -273,11 +281,9 @@ $view = unserialize($_SESSION['view']);
                             </tbody>
                             <tfoot>
                                 <tr>
+                                    <td class="closepopup" onclick="toggle_visibility('ContactForm')">Close Contact Pop-Up</td>
                                     <td>
-                                        <input class="closepopup" type="button" onclick="toggle_visibility('ContactForm')" value="Close Contact Pop-Up"/>
-                                    </td>
-                                    <td>
-                                        <input class="closepopup" type="submit"  onclick="toggle_visibility('ContactForm')" name="submit" value="Send Comment">
+                                        <input type="submit" class="closepopup" onclick="toggle_visibility('ContactForm')" name="submit" value="Send Comment">
                                     </td>
                                 </tr>                      
                             </tfoot>
@@ -289,23 +295,36 @@ $view = unserialize($_SESSION['view']);
 
         <!-- BOXES -->
         <section id="boxes">
-            <div class="container">
+            <div class="boxbuttons">
                 <?php
                 foreach ($view->getModel()->getPortfolioForm("AreaExpertArray") as $area) {
-                    echo "<div class=\"box\">\n<img src=\".\img\\" . $area[2] . "\">\n<h3>" . $area[0] . "</h3>\n<p>" . $area[1] . "</p>\n</div>\n";
+                    echo "<div class=\"box\">";
+                    echo "<img onclick=\"toggle_visibility('" . $area[0] . "');\" src=\".\img\\" . $area[2] . "\" alt=\"" . $area[0] . "\">";
+                    echo "<h3>" . $area[0] . "</h3>";
+                    echo "</div>\n";
                 }
-                ?>
+                ?>                
             </div>
-        </section>
+            <div class="boxframes">
+                <?php
+                foreach ($view->getModel()->getPortfolioForm("AreaExpertArray") as $area) {
+                    echo "<iframe id=\"" . $area[0] . "\" src=\"" . $area[1] . "\"></iframe>";
+                }
+                ?>   
+            </div>
+        </section>                                    
 
+        <!-- PAGE FOOTER LINKS -->
         <footer>
-            <div class="button-area-line">
+
+            <ul class="bottomnav">
                 <?php
                 foreach ($view->getModel()->getPortfolioForm("FooterArray") as $foot) {
-                    echo "<a href=\"" . $foot[1] . "\">" . $foot[0] . "</a>";
+                    echo "<li><a href=\"" . $foot[1] . "\">" . $foot[0] . "</a></li>";
                 }
                 ?>
-            </div>
+            </ul>
+
         </footer>
 
         <!-- Scripts -->
