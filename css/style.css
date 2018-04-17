@@ -1,0 +1,354 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11-Apr-2018, 20:57:29
+    Author     : micha
+*/
+
+/* Reponsive Navigation - Top */
+
+body {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 16px;
+    margin: 0;
+    background-color: #333;
+}
+
+/* TOP NAVIGATION BAR */
+ul.topnav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+ul.topnav li {float: left;}
+
+ul.topnav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+ul.topnav li a:hover:not(.active) {background-color: red;}
+
+ul.topnav li a.active {background-color: #4CAF50;}
+
+ul.topnav li.right {float: right;}
+
+/* Showcase */
+.showcase{
+    background:url('../img/pexels-photo-934062LG.jpeg') no-repeat;
+    background-position:center;
+    min-height: 600px;
+    padding:10px 10px;
+    color: blue;
+}
+
+.showcase h1{
+    font-size: 30px;
+    font-weight:700;
+    text-transform: uppercase;
+}
+
+.showcase hr{
+    width:600px;
+    margin:auto;
+    border-width: 3px;
+    border-color: red;
+}
+
+.showcase p{
+    font-size: 16px;
+    padding-bottom: 29px;
+}
+
+.center {
+    text-align: center;
+}
+
+/*pop up tables */
+.datatable{
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 16px;
+}
+
+.datatable td{
+    padding: 5px;
+}
+
+.datatable td, .datatable thead .datatable tfoot{
+    border: 1px solid #ddd;
+}
+
+.datatable tr:nth-child(odd){
+    background-color: skyblue;
+}
+
+.datatable tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+.datatable tr:hover {
+    background-color: #ddd;
+}
+
+.datatable tfoot td:hover ,
+.datatable tfoot td:hover *{
+    background-color: red;
+}
+
+.datatable thead tr th{
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+}
+
+.datatable tfoot tr td{
+    text-align: center;
+    background-color: #333;
+    padding: 10px;
+}
+
+/* Pop Up */
+.popup-position{ 
+    position: fixed; top: 0; 
+    left: 0; 
+    background-color: rgba(0,0,0,0.5); 
+    width:100%; 
+    height: 100%; 
+    display: none;
+}
+
+#popup-wrapper{ 
+    margin: 80px auto; 
+    width:25%; 
+    background-color: skyblue;
+}
+
+#popup-container{
+    background-color: skyblue; 
+}
+
+.closepopup{
+    cursor: pointer;
+    color: white;
+}
+
+.closepopup:hover{
+
+}
+
+/* Form */
+input[type=submit] {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 16px;
+    width: 100%;
+    background-color: #333;
+    border: none;
+ }
+
+input[type=email],
+input[type=text] {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 16px;
+    width: 100%;
+ }
+ 
+ td textarea{
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 16px;     
+    width: 100%;
+ }
+ 
+/* Boxes */
+#boxes{
+    margin-top: 20px;
+    color: white;
+    background-color: skyblue;
+}
+
+#boxes .box{
+    float: left;
+    text-align: center;
+    width: 25%;
+}
+
+#boxes .box img{
+    width: 90px;
+}
+
+#boxes .boxbuttons{
+    width: 100%;
+}
+
+#boxes .boxbuttons h3{
+    display: none;
+}
+
+#boxes .boxframes{
+    float:left;
+    width: 100%;
+}
+
+#boxes iframe{
+    float:left;
+    display: none;
+    width: 24%;
+    height: 600px;
+}
+
+/* Footer */
+
+footer {
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+}
+
+ul.bottomnav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+ul.bottomnav li {float: left;}
+
+ul.bottomnav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+ul.bottomnav li a:hover:not(.active) {background-color: red;}
+
+ul.bottomnav li.right {float: right;}
+
+.bottomnav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+@media screen and (max-width: 600px){
+    /* All Elements */
+
+    /* Showcase */
+    .showcase {
+        background:url('../img/pexels-photo-934062SM.jpeg') no-repeat;
+        padding: 10px; 
+        height: 400px; 
+        background-color: white;
+    }
+    
+    .showcase h1 {
+        font-size:medium;
+        font-weight: bold;
+    }
+    
+    .showcase p {
+        font-size:small; 
+        padding-bottom: 10px;
+    }    
+    
+    .showcase hr{
+        width: 200px; 
+        border-width: 2px;
+    }
+    
+    /* Nav Bar*/
+    ul.topnav li.right, 
+    ul.topnav li {
+        float: none; 
+        font-size: small; 
+    }
+    
+    ul.topnav li a{
+        padding: 7px 8px;
+    }
+
+    /* Table */
+    .datatable{
+        font-size: small;        
+    }
+    
+    .datatable td{
+        padding: 2px;
+    }
+    
+    /* Pop-Up */
+    #popup-wrapper{ 
+        margin: 5px auto; 
+        width:300px; 
+        background-color: skyblue;
+    }    
+
+    /* Forms */
+    input[type=submit], 
+    input[type=email],
+    input[type=text]{
+        font-size: small;    
+    }
+
+    /* Tables */
+    td textarea{
+        font-family: "Comic Sans MS", cursive, sans-serif;
+        font-size: 16px;     
+        width: 100%;
+    }
+    
+    /* Boxes */
+    #boxes .boxbuttons{
+        width: 100%;
+        padding: 5px;
+    }
+    
+    #boxes .box {
+        float: none;
+        width: 100%;
+        padding: 10px;
+    }
+    
+    #boxes .box img {
+        display: none;
+    }
+    
+    .box p{
+        font-size: small;
+    }
+    
+    .box h3{
+        font-size: medium;
+        font-weight: bold;
+        margin: 2px;
+    }
+    
+    #boxes .boxframes,
+    #boxes iframe{
+    display: none;
+    }
+
+    /* Footer */
+    ul.bottomnav, ul.bottomnav li.right, 
+    ul.bottomnav li {
+        float: none; 
+        display: block; 
+        font-size: small;
+    }
+    
+    ul.bottomnav li a{
+        padding: 7px 8px;
+    }    
+}
